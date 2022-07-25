@@ -6,7 +6,7 @@ https://www.rabbitmq.com/tutorials/tutorial-six-python.html
 **Requesting Data**
 1) Create RabbitMQ connection
 2) Generate unqueId
-3) Format recipe as JSON array or objects as described below
+3) Format recipe as JSON array of objects as described below
 4) Stringify JSON recipe
 5) Create generic queue to listen for response from microservice
 6) Send formatted recipe string and uniqueId to queue named 'data' to be passed asynchronously to the microservice. Specify that the microservice should **replyTo:** the generic listening queue
@@ -24,10 +24,13 @@ recipe = [
 
 **Receiving Data**
 1) On the generic listening queue specified in the **replyTo:**, verify uniqueId matches the message sent to the 'data' queue
-2) Record the messag content string as a variable
+2) Record the message content string as a variable
 3) JSON.parse the reply message to access the converted recipe quantities. For example, if the reply message was parsed and saved as a variable reply, then the adjusted quanitities would be accessed with the following javaScript code:
 
 **for(let i = 1; i < rec.length; i++)  reply[i].qty;**
 
 
-![image](https://user-images.githubusercontent.com/107817113/180891614-2e88abe5-5b89-4222-96de-ec8b36ef34b6.png)
+RabbitMQ allows the data and replyTo: queues to stay open so long as a reply has not been recieved, and terminates both upon receipt of the reply as illustrated in the below diagram
+
+![image](https://user-images.githubusercontent.com/107817113/180894350-737eae6e-c610-47dc-90bb-edafa13ea869.png)
+
