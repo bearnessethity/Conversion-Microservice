@@ -27,7 +27,7 @@ recipe = [
 2) Record the message content string as a variable
 3) JSON.parse the reply message to access the converted recipe quantities. For example, if the reply message was parsed and saved as a variable reply, then the adjusted quanitities would be accessed with the following javaScript code:
 
-**for(let i = 1; i < rec.length; i++)  reply[i].qty;**
+**for(let i = 1; i < reply.length; i++)  reply[i].qty;**
 
 
 RabbitMQ allows the data and replyTo: queues to stay open so long as a reply has not been recieved, and terminates both upon receipt of the reply as illustrated in the below diagram
